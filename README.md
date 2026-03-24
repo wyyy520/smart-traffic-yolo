@@ -32,7 +32,7 @@
 - 可用于紧急车辆优先通行判断
 
 ### 🚒 消防车识别（Fire Truck Detection）
-![fire truck](fire truck.jpg)
+![fire_truck](fire_truck.jpg)
 - 能区分普通车辆与特种车辆
 - 提供交通调度关键输入数据
 
