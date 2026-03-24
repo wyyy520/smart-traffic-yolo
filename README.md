@@ -30,3 +30,7 @@ model = YOLO("best.pt")
 # 识别图片
 results = model("test.jpg")
 results[0].save("result.jpg")
+## 效果展示
+![救护车](ambulance.jpg)
+![警车](police.jpg)
+![消防车](fire truck.jpg)
