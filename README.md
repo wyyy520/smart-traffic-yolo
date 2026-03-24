@@ -19,6 +19,27 @@
 - 批量识别图片
 - 输出带标注框的检测结果
 - 可直接部署用于智能交通项目
+- ## 项目效果
+
+### 🚓 警车识别（Police Detection）
+![police](police.jpg)
+- 成功识别 police，置信度 0.92
+- 在复杂背景下仍能稳定检测
+
+### 🚑 救护车识别（Ambulance Detection）
+![ambulance](ambulance.jpg)
+- 支持多目标检测
+- 可用于紧急车辆优先通行判断
+
+### 🚒 消防车识别（Fire Truck Detection）
+![fire truck](fire truck.jpg)
+- 能区分普通车辆与特种车辆
+- 提供交通调度关键输入数据
+
+- 💡 本系统可扩展用于：
+- 应急车辆优先通行控制
+- 智能交通信号优化
+- 城市交通监测与调度
 
 ## 使用方法
 ```python
