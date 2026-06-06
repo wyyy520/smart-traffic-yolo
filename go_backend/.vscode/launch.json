@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "启动智慧交通后端",
+            "type": "go",
+            "request": "launch",
+            "mode": "run",
+            "program": "${fileDirname}",
+            "cwd": "${fileDirname}",
+            "args": []
+        }
+    ]
+}

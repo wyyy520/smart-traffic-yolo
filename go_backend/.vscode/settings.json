@@ -1,0 +1,58 @@
+{
+    "go.goroot": "C:\\Users\\13069\\go\\pkg\\mod\\golang.org\\toolchain@v0.0.1-go1.26.3.windows-amd64",
+    "go.toolsManagement.autoUpdate": true,
+    "go.useLanguageServer": true,
+    "go.lintTool": "golint",
+    "go.formatTool": "goimports",
+    "go.buildOnSave": "workspace",
+    "go.lintOnSave": "workspace",
+    "go.testOnSave": false,
+    "go.coverOnSave": false,
+    "go.coverageDecorator": {
+        "type": "gutter",
+        "coveredHighlightColor": "rgba(64,128,64,0.5)",
+        "uncoveredHighlightColor": "rgba(128,64,64,0.25)",
+        "coveredGutterStyle": "blockblue",
+        "uncoveredGutterStyle": "slashred"
+    },
+    "go.coverageOptions": "showCoveredCodeOnly",
+    "go.showWelcome": false,
+    "go.useCodeSnippetsOnFunctionSuggest": true,
+    "go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
+    "go.autocompleteUnimportedPackages": true,
+    "go.delveConfig": {
+        "dlvLoadConfig": {
+            "followPointers": true,
+            "maxVariableRecurse": 1,
+            "maxStringLen": 120,
+            "maxArrayValues": 64,
+            "maxStructFields": -1
+        }
+    },
+    "[go]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
+        "editor.suggest.snippetsPreventQuickSuggestions": false
+    },
+    "[go.mod]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    },
+    "gopls": {
+        "ui.semanticTokens": true,
+        "ui.completion.usePlaceholders": true,
+        "ui.diagnostic.analyses": {
+            "unusedparams": true,
+            "shadow": true,
+            "useany": true,
+            "unusedwrite": true,
+            "usestdlibvars": true
+        },
+        "ui.diagnostic.staticcheck": true,
+        "formatting.gofumpt": true
+    }
+}
