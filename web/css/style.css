@@ -133,6 +133,17 @@ body {
     box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
 }
 
+/* Dashboard 按钮样式 */
+.btn-dashboard {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-dashboard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
 .card {
     background: white;
     border-radius: 12px;

@@ -400,6 +400,32 @@ window.addEventListener('beforeunload', function() {
     }
 });
 
+// ==================== 打开 Dashboard ====================
+/**
+ * 打开 Streamlit Dashboard
+ * Dashboard 是一个独立的可视化页面，需要先安装依赖并启动
+ */
+function openDashboard() {
+    // Dashboard 地址
+    const dashboardUrl = 'http://localhost:8501';
+    
+    // 检查 Dashboard 是否已启动
+    fetch(dashboardUrl, { method: 'HEAD' })
+        .then(response => {
+            if (response.ok) {
+                // Dashboard 已启动，直接打开
+                window.open(dashboardUrl, '_blank');
+            } else {
+                // Dashboard 未启动，提示用户
+                alert('Dashboard 未启动！\n\n请在项目目录下运行：\nstreamlit run dashboard.py\n\n然后访问：http://localhost:8501');
+            }
+        })
+        .catch(() => {
+            // 无法连接，提示用户启动 Dashboard
+            alert('Dashboard 未启动！\n\n请打开终端并运行：\nstreamlit run dashboard.py\n\n然后访问：http://localhost:8501');
+        });
+}
+
 // 导出全局函数供 HTML 调用
 window.startCamera = startCamera;
 window.stopCamera = stopCamera;
@@ -407,3 +433,4 @@ window.captureSnapshot = captureSnapshot;
 window.toggleAutoAnalysis = toggleAutoAnalysis;
 window.clearSnapshots = clearSnapshots;
 window.exportSnapshots = exportSnapshots;
+window.openDashboard = openDashboard;
