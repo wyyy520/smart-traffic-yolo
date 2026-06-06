@@ -313,61 +313,7 @@ start_system.vbs
 
 ## 📄 许可证
 
-本项目仅供学习和研究使用。# ⚠️ 重要说明 - GitHub 同步
-
-## ✅ 本地 Git 配置完成
-
-已成功初始化 Git 仓库并提交所有代码！
-
-**仓库地址**：[https://github.com/wyyy520/smart-traffic-yolo](https://github.com/wyyy520/smart-traffic-yolo)
-
-## 📋 待完成事项
-
-### 1. 推送到 GitHub
-
-需要您手动执行以下命令：
-
-```bash
-cd d:\smart-traffic-yolo-main
-git push -u origin master
-```
-
-**首次推送时需要认证**：
-- 使用 GitHub 用户名
-- 使用 **Personal Access Token**（不是密码！）
-  - GitHub → Settings → Developer settings → Personal access tokens → Generate new token
-  - 勾选 `repo` 权限
-
-### 2. YOLO 模型文件
-
-**重要提示**：`yolo/best.pt` 文件未包含在仓库中（模型文件太大）
-
-**原因**：`.gitignore` 中已排除 `.pt` 文件
-
-**解决方案**：
-1. 手动复制 `best.pt` 到本地仓库
-2. 或在 GitHub Release 中单独上传模型文件
-3. 或使用 Git LFS（Large File Storage）存储模型
-
-## 📦 本地文件清单
-
-已同步的文件（15个）：
-- ✅ Go 后端代码
-- ✅ Python AI 模块
-- ✅ 前端界面
-- ✅ 启动脚本
-- ✅ 配置文件
-
-## 🚀 下一步
-
-1. 配置 GitHub 认证
-2. 推送代码：`git push -u origin master`
-3. 添加 YOLO 模型文件（可选）
-
----
-
 **创建时间**：2026-06-06
-
 
 ## 🤝 贡献
 
