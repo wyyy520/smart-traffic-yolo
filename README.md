@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/28663517/README.md)
 # 🚦 智慧交通Agent系统
 
 > 基于 YOLO + LSTM + 非线性控制的自适应交通管理系统
@@ -6,89 +5,121 @@
 [![Go Version](https://img.shields.io/badge/Go-1.21+-00ADD8.svg)](https://golang.org/)
 [![YOLOv8](https://img.shields.io/badge/YOLOv8-v8.0-blue.svg)](https://github.com/ultralytics/ultralytics)
 [![Python](https://img.shields.io/badge/Python-3.8+-3776AB.svg)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.32+-FF4B4B.svg)](https://streamlit.io/)
+
+---
 
 ## ⚡ 快速启动
 
 ### 一键启动（推荐）
 
-双击 `start_system.vbs` 即可启动系统（无窗口后台运行）
+```bash
+# Windows
+双击 start_system.vbs
 
-> 🎉 自动完成：
-> 1. 启动 Go 后端服务（完全隐藏）
-> 2. 打开前端页面（自动打开浏览器）
+# 或手动启动
+cd go_backend && go run main.go
+```
+
+### 启动 Dashboard
+
+```bash
+streamlit run dashboard.py
+```
 
 ---
 
 ## 📋 功能特性
 
-- ✅ **紧急车辆检测** - YOLOv8 检测救护车、消防车、警车
-- ✅ **车流量预测** - LSTM 神经网络预测未来交通流量
-- ✅ **排队长度计算** - 像素点矩阵仿射逻辑（无三角函数）
-- ✅ **信号灯优化** - 非线性模型 + β调节因子
-- ✅ **天气影响** - 雨雪雾天气自动调整通行时间
-- ✅ **实时分析** - 前端实时展示 + Go 后端 API
+### ✅ 核心功能
+- **紧急车辆检测** - YOLOv8 实时检测救护车、消防车、警车
+- **车流量预测** - LSTM 神经网络预测未来交通流量
+- **排队长度计算** - 像素点矩阵仿射逻辑（无三角函数）
+- **信号灯优化** - 非线性模型 + β调节因子防止突变
+- **天气影响** - 雨雪雾天气自动调整通行时间
+
+### ✅ 高级功能（新增）
+- **ByteTrack 目标追踪** - 遮挡环境下高精度 ID 保持
+- **车牌识别 OCR** - 支持蓝牌、黄牌、绿牌、港澳牌
+- **车型分类** - 识别轿车、SUV、货车、客车等
+- **Streamlit Dashboard** - 实时数据可视化平台
+
+---
 
 ## 🚀 快速开始
 
-### 1. 一键启动（推荐）
+### 1. 环境要求
 
-双击运行 **`start_system.bat`**
+| 依赖 | 版本 | 说明 |
+|------|------|------|
+| Go | 1.21+ | 后端服务 |
+| Python | 3.8+ | AI 模块 |
+| Node.js | 14+ | 前端开发（可选） |
 
-### 2. 手动启动
+### 2. 一键启动
 
 ```bash
+# 方法1：VBS 脚本（无窗口）
+双击 start_system.vbs
+
+# 方法2：手动启动
 cd go_backend
-"C:\Users\13069\go\pkg\mod\golang.org\toolchain@v0.0.1-go1.26.3.windows-amd64\bin\go.exe" run main.go
+go run main.go
 ```
 
-后端将在 `http://localhost:8080` 启动
+### 3. 启动可视化 Dashboard
 
-### 3. 打开前端界面
+```bash
+pip install -r requirements.txt
+streamlit run dashboard.py
+```
+
+访问：`http://localhost:8501`
+
+### 4. 打开前端界面
 
 在浏览器中打开：
 ```
 web/html/index.html
 ```
 
-### 4. 使用系统
-
-1. 点击 **启动摄像头** 开启视频流
-2. 点击 **抓拍分析** 进行单次分析
-3. 点击 **实时分析** 开启自动模式（每5秒）
-4. 查看右侧 **实时数据**：
-   - 📊 排队长度
-   - 🚨 紧急车辆
-   - ⏱️ 信号灯建议
-   - 🌤️ 天气信息
+---
 
 ## 📁 项目结构
 
 ```
-smart-traffic-yolo-main/
+smart-traffic-yolo/
 ├── go_backend/                    # Go 后端服务
-│   ├── main.go                   # 主程序
+│   ├── main.go                   # 主程序（Gin框架）
 │   ├── go.mod                    # Go 模块配置
-│   └── go.sum                    # 依赖锁定
+│   ├── go.sum                    # 依赖锁定
+│   └── .vscode/                  # VS Code 配置
 │
 ├── logic/                         # Python AI 模块
 │   ├── emergency_detector.py      # 紧急车辆检测（YOLO）
 │   ├── lstm_predictor.py         # LSTM 车流预测
-│   ├── queue_calculator.py        # 排队长度计算
-│   └── traffic_controller.py      # 非线性信号灯优化
+│   ├── queue_calculator.py        # 排队长度计算（像素仿射）
+│   ├── traffic_controller.py      # 非线性信号灯优化
+│   ├── vehicle_tracker.py         # ByteTrack 目标追踪 ⭐ 新增
+│   ├── license_plate_recognizer.py # 车牌识别 OCR ⭐ 新增
+│   └── vehicle_classifier.py      # 车型分类 ⭐ 新增
 │
 ├── web/                          # 前端界面
 │   ├── html/index.html           # 主页面
-│   ├── css/style.css            # 样式
+│   ├── css/style.css            # 样式文件
 │   └── js/app.js                # JavaScript 逻辑
 │
 ├── yolo/                         # YOLO 模型
 │   ├── best.pt                   # 训练好的模型（6.2MB）
 │   └── detect.py                 # 检测脚本
 │
-├── start_system.vbs              # ⭐ 一键启动脚本（VBS）
-├── README.md                     # 项目说明文档
-└── requirements.txt              # Python 依赖
+├── dashboard.py                   # Streamlit 可视化 ⭐ 新增
+├── start_system.vbs              # 一键启动脚本
+├── requirements.txt              # Python 依赖
+└── README.md                     # 项目文档
 ```
+
+---
 
 ## 🔧 核心算法
 
@@ -101,9 +132,9 @@ real_distance = a × pixel² + b × pixel + c
 ```
 
 **特点**：
-- 计算效率高
-- 精度可靠
-- 无需三角函数
+- ✅ 计算效率高（无需三角函数）
+- ✅ 精度可靠（多项式拟合）
+- ✅ 扩展性强（支持多车道）
 
 ### 2. 非线性信号灯优化
 
@@ -112,27 +143,103 @@ real_distance = a × pixel² + b × pixel + c
 β = 0.1 + 0.8 × sigmoid(6 × (congestion - 0.5))
 ```
 
-**作用**：防止通行时间突变
+**作用**：防止通行时间突变，取值范围 [0.1, 0.9]
 
 #### 绿灯时间（对数函数）
 ```
 green_time = min + (max-min) × log(1+base_time) / log(101)
 ```
 
-**作用**：避免通行时间线性增长
+**作用**：避免通行时间线性增长，实现平滑过渡
 
 ### 3. 天气影响因子
 
 | 天气 | 影响因子 | 说明 |
 |------|:--------:|------|
 | ☀️ 晴天/多云 | 1.0 | 无影响 |
-| 🌧️ 小雨 | 1.1 | +10% |
-| 🌧️ 大雨 | 1.2 | +20% |
-| 🌨️ 小雪 | 1.2 | +20% |
-| 🌨️ 大雪 | 1.3 | +30% |
-| 🌫️ 雾 | 1.4 | +40% |
-| 🌧️🌨️ 雨夹雪 | 1.35 | +35% |
-| 冰雹 | 1.3 | +30% |
+| 🌧️ 小雨 | 1.1 | +10% 通行时间 |
+| 🌧️ 大雨 | 1.2 | +20% 通行时间 |
+| 🌨️ 小雪 | 1.2 | +20% 通行时间 |
+| 🌨️ 大雪 | 1.3 | +30% 通行时间 |
+| 🌫️ 雾 | 1.4 | +40% 通行时间 |
+| 🌧️🌨️ 雨夹雪 | 1.35 | +35% 通行时间 |
+| 冰雹 | 1.3 | +30% 通行时间 |
+
+---
+
+## 🆕 新增高级功能
+
+### 1. ByteTrack 目标追踪
+
+**文件**：`logic/vehicle_tracker.py`
+
+**功能特点**：
+- 🔍 高精度多目标追踪
+- 🛡️ 遮挡环境下 ID 保持能力强
+- 📈 速度估计和轨迹记录
+- 🔄 实时轨迹绘制
+
+**使用示例**：
+```python
+from logic.vehicle_tracker import VehicleTracker
+
+tracker = VehicleTracker()
+results = tracker.process_frame(detections)
+# 返回：[{track_id, bbox, score, class, center, velocity, history}]
+```
+
+### 2. 车牌识别 OCR
+
+**文件**：`logic/license_plate_recognizer.py`
+
+**功能特点**：
+- 🔤 双引擎支持（EasyOCR + PaddleOCR）
+- 🚗 支持多种车牌类型：蓝牌、黄牌、绿牌、白牌、黑牌
+- 🎨 自动识别车牌颜色
+- 💾 车牌数据库管理
+
+**使用示例**：
+```python
+from logic.license_plate_recognizer import LicensePlateRecognizer
+
+recognizer = LicensePlateRecognizer()
+results = recognizer.recognize_plate(image)
+# 返回：[{plate, confidence, color, bbox}]
+```
+
+### 3. 车型分类
+
+**文件**：`logic/vehicle_classifier.py`
+
+**功能特点**：
+- 🚙 车辆类型识别：轿车、SUV、货车、客车、摩托车等
+- 🎨 车辆颜色识别：10种常用颜色
+- 🏷️ 车辆品牌识别
+- 📊 交通流量分析
+
+**使用示例**：
+```python
+from logic.vehicle_classifier import VehicleClassifier
+
+classifier = VehicleClassifier()
+result = classifier.classify_vehicle(image, bbox)
+# 返回：{type, type_name, color, brand, aspect_ratio, area_ratio}
+```
+
+### 4. Streamlit Dashboard
+
+**文件**：`dashboard.py`
+
+**功能模块**：
+- 📊 实时指标监控卡片
+- 📈 24小时流量趋势图
+- 🥧 车辆类型分布饼图
+- 📉 周流量对比分析
+- 🚨 紧急车辆响应统计
+- 🌧️ 天气影响分析
+- 🎥 实时监控视频区域
+
+---
 
 ## 📡 API 接口
 
@@ -196,6 +303,8 @@ Content-Type: application/json
 }
 ```
 
+---
+
 ## 🧠 AI 模型
 
 ### YOLOv8 紧急车辆检测
@@ -223,15 +332,34 @@ results = model('test.jpg', conf=0.5)
 
 **置信度**：0.3 - 0.95
 
-## 🎨 界面预览
+---
 
-前端界面包含：
-- 📹 实时摄像头画面
-- 📸 抓拍记录
-- 📊 排队长度统计
-- 🚨 紧急车辆检测
-- ⏱️ 信号灯优化建议
-- 🌤️ 天气信息（高德API）
+## 📊 Dashboard 使用指南
+
+### 启动方式
+
+```bash
+# 安装依赖
+pip install streamlit plotly pandas numpy
+
+# 启动 Dashboard
+streamlit run dashboard.py
+```
+
+### Dashboard 功能
+
+| 模块 | 说明 |
+|------|------|
+| 📊 实时指标 | 车流量、紧急车辆、平均车速、排队长度 |
+| 🌤️ 天气信息 | 天气状况、温度、湿度、风速 |
+| 📈 流量趋势 | 24小时车辆流量变化 |
+| 🥧 车型分布 | 各类车辆占比统计 |
+| 📉 周对比 | 每日流量对比分析 |
+| 🚨 紧急响应 | 救护车、消防车、警车统计 |
+| 🌧️ 天气影响 | 天气与交通状况关系 |
+| 🎥 实时监控 | 摄像头画面展示 |
+
+---
 
 ## 📦 安装依赖
 
@@ -242,17 +370,26 @@ cd go_backend
 go mod tidy
 ```
 
-### Python 依赖（可选）
+### Python 依赖
 
 ```bash
 pip install -r requirements.txt
 ```
 
 **主要依赖**：
-- `ultralytics` - YOLOv8
-- `tensorflow` - LSTM 模型
-- `opencv-python` - 图像处理
-- `flask` - Python API（可选）
+
+| 依赖 | 版本 | 用途 |
+|------|------|------|
+| ultralytics | 8.0.196 | YOLOv8 |
+| tensorflow | 2.13.0 | LSTM 模型 |
+| opencv-python | 4.8.1.78 | 图像处理 |
+| streamlit | 1.32.0 | Dashboard |
+| plotly | 5.18.0 | 可视化图表 |
+| easyocr | 1.7.0 | 车牌识别 |
+| paddleocr | 2.8.0 | 车牌识别 |
+| flask | 3.0.0 | Python API |
+
+---
 
 ## ⚠️ 注意事项
 
@@ -262,14 +399,16 @@ pip install -r requirements.txt
 
 ### 2. 天气 API
 - 已配置高德地图 API Key：`72185d0baa8bf5211c25a929606bc156`
-- 城市：郑州
+- 城市：郑州中原区
 - 网络异常时使用默认天气数据
 
 ### 3. Go 环境
-如果 `go run` 不可用，使用：
+如果 `go run` 不可用，使用完整路径：
 ```bash
-start_system.vbs
+"C:\Users\13069\go\pkg\mod\golang.org\toolchain@v0.0.1-go1.26.3.windows-amd64\bin\go.exe" run main.go
 ```
+
+---
 
 ## 🔍 故障排查
 
@@ -291,37 +430,44 @@ start_system.vbs
 2. 允许摄像头权限
 3. 检查摄像头是否被占用
 
-### 问题：启动脚本无法运行
+### 问题：Dashboard 无法启动
 **解决**：
-1. 右键 `start_system.vbs` → 用记事本打开
-2. 检查 Go 路径是否正确
-3. 手动启动：
-   ```bash
-   cd go_backend
-   go run main.go
-   ```
+1. 检查 Python 版本
+2. 安装依赖：`pip install -r requirements.txt`
+3. 检查端口占用：`netstat -ano | findstr 8501`
+
+---
 
 ## 📚 技术栈
 
-| 层次 | 技术 |
-|------|------|
-| **后端** | Go 1.21+ / Gin 框架 |
-| **前端** | HTML5 / CSS3 / JavaScript |
-| **AI** | YOLOv8 / LSTM / TensorFlow |
-| **图像** | OpenCV / Pillow |
-| **天气** | 高德地图 API |
+| 层次 | 技术 | 版本 |
+|------|------|------|
+| **后端** | Go / Gin | 1.21+ |
+| **前端** | HTML5 / CSS3 / JavaScript | - |
+| **AI** | YOLOv8 / LSTM / TensorFlow | 8.0 / 2.13 |
+| **可视化** | Streamlit / Plotly | 1.32 / 5.18 |
+| **图像处理** | OpenCV / Pillow | 4.8 / 10.0 |
+| **OCR** | EasyOCR / PaddleOCR | 1.7 / 2.8 |
+| **天气** | 高德地图 API | - |
+
+---
 
 ## 📄 许可证
 
-**创建时间**：2026-06-06
+MIT License
+
+---
 
 ## 🤝 贡献
 
 欢迎提交 Issue 和 Pull Request！
 
----[GITHUB_SYNC.md](https://github.com/user-attachments/files/28663528/GITHUB_SYNC.md)
+---
 
-
-**版本**：v1.0  
+**版本**：v1.1  
 **更新时间**：2026-06-06  
-**作者**：AI Assistant
+**作者**：AI Assistant  
+
+---
+
+*🚦 智慧交通，让城市更畅通*
