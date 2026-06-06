@@ -357,7 +357,6 @@ git push -u origin master
 - ✅ 前端界面
 - ✅ 启动脚本
 - ✅ 配置文件
-- ❌ YOLO 模型（需手动添加）
 
 ## 🚀 下一步
 
